@@ -1,0 +1,44 @@
+group 'com.netease.htp'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        flatDir {
+            dirs project(':htprotect').file('libs')
+        }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 31
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 19
+        multiDexEnabled true
+    }
+}
+
+dependencies {
+    implementation(name: 'HTProtectLib-5.4.5', ext: 'aar')
+    implementation "androidx.multidex:multidex:2.0.1"
+}
